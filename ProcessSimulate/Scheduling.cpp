@@ -27,10 +27,10 @@ Scheduling::Scheduling():
 	}
 }
 
-void Scheduling::excuteSJF()
+void Scheduling::excuteSRTN()
 {
-	auto cmp = [&](Process* p1, Process* p2) {
-		return p1->getRunTime() > p2->getRunTime();
+	auto cmp = [](Process* p1, Process* p2) {
+		return p1->getRemainTime() > p2->getRemainTime();
 	};
 	priority_queue < Process*, vector<Process*>, decltype(cmp)> pendingQueue{cmp};
 	while (mProcessNum>0) {
@@ -42,7 +42,7 @@ void Scheduling::excuteSJF()
 			}
 		}
 		if (!pendingQueue.empty()) {
-			//执行当前最短进程
+			//执行当前剩余时间最短的进程
 			Process* temp = pendingQueue.top();
 			//第一次被调度
 			if (!temp->mIsStart) {

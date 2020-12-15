@@ -14,8 +14,8 @@ int main() {
 		cin >> choice;
 		switch (choice) {
 		case 1:
-			cout << "-----开始执行SJF-----" << endl;
-			s.excuteSJF();
+			cout << "-----开始执行SRTN-----" << endl;
+			s.excuteSRTN();
 			s.print();
 			cout << "1.重新选择  2.退出" << endl;
 			cin >> choice;

@@ -28,3 +28,8 @@ int Process::getRunTime()
 {
 	return mRunTime;
 }
+
+int Process::getRemainTime()
+{
+	return mRemainTime;
+}

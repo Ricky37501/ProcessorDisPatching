@@ -7,7 +7,7 @@ class Scheduling
 {
 public:
 	Scheduling();
-	void excuteSJF();
+	void excuteSRTN();
 	void excuteRR();
 	void print();
 	void restart();

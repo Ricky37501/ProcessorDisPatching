@@ -10,6 +10,7 @@ public:
 	~Process();
 	int getArriveTime();
 	int getRunTime();
+	int getRemainTime();
 private:
 	string mName = "NAN";	//进程名
 	int mArriveTime;					//到达时间
