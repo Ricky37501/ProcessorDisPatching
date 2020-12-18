@@ -12,7 +12,7 @@ public:
 	int getRunTime();
 	int getRemainTime();
 private:
-	string mName = "NAN";	//进程名
+	string mName;						//进程名
 	int mArriveTime;					//到达时间
 	int mRunTime;						//预估运行时间
 	int mRemainTime;				//剩余运行时间

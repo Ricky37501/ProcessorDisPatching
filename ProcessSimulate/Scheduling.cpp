@@ -55,7 +55,7 @@ void Scheduling::excuteSRTN()
 			if (temp->mRemainTime == 0) {
 				temp->mIsDone = true;
 				temp->mFinishTime = mCurrentTime;
-				temp->mTurnaroundTime = temp->mFinishTime - temp->mArriveTime;
+				temp->mTurnaroundTime = temp->mFinishTime - temp->mArriveTime+1;
 				temp->mTurnaroundTime_W = static_cast<double>(temp->mTurnaroundTime) /static_cast<double>( temp->mRunTime);
 				mProcessNum--;
 			}
@@ -105,6 +105,7 @@ void Scheduling::excuteRR()
 				if (temp->mRemainTime > 0) {
 					cout << "时刻" << mCurrentTime << "  执行线程" << temp->mName << endl;
 					temp->mRemainTime--;
+					//注意这里如果有进程执行完成系统时间会多加一次
 					mCurrentTime++;
 				}
 				else {
@@ -126,8 +127,8 @@ void Scheduling::excuteRR()
 			}
 			if (temp->mRemainTime == 0) {
 				temp->mIsDone = true;
-				temp->mFinishTime = mCurrentTime;
-				temp->mTurnaroundTime = temp->mFinishTime - temp->mArriveTime;
+				temp->mFinishTime = mCurrentTime-1;
+				temp->mTurnaroundTime = temp->mFinishTime - temp->mArriveTime+1;
 				temp->mTurnaroundTime_W = static_cast<double>(temp->mTurnaroundTime) / static_cast<double>(temp->mRunTime);
 				mProcessNum--;
 			}
@@ -135,15 +136,18 @@ void Scheduling::excuteRR()
 				pendingQueue.push(temp);
 			}
 		}//if
+		else {
+			mCurrentTime++;
+		}
 	}//while
 }
 
 void Scheduling::print()
 {
 	cout << "-------------调度结果-------------" << endl;
-	cout << "进程名       开始时间       完成时间       周转时间       带权周转时间" << endl;
+	cout << "进程名\t\t到达时间\t开始时间\t完成时间\t周转时间\t带权周转时间" << endl;
 	for (Process& p : mProcessList) {
-		cout << p.mName <<setw(13)<< p.mStartTime << setw(16) << p.mFinishTime << setw(16) << p.mTurnaroundTime << setw(16) << p.mTurnaroundTime_W << endl;
+		cout << p.mName<<"\t\t" <<p.mArriveTime<<"\t\t"<< p.mStartTime << "\t\t" << p.mFinishTime << "\t\t" << p.mTurnaroundTime << "\t\t" << p.mTurnaroundTime_W << endl;
 	}
 	cout << endl;
 }
